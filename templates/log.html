@@ -1,0 +1,136 @@
+<head>
+    <!-- Basic Page Needs-->
+    <meta charset="utf-8">
+    {% if title %}
+    <title>{{ title }}</title>
+    {% endif %}
+    <!-- Mobile Specific Metas-->
+    <meta name="viewport" content="width=device-width, initial-scale=1 shrink-to-fit=no">
+    <!-- FONT-->
+    <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="{{url_for('.static', filename='css/tables.css')}}">
+    <link rel="stylesheet" href="{{url_for('.static', filename='css/main.css')}}">
+    <link rel="stylesheet" href="{{url_for('.static', filename='css/admin.css')}}">
+    <link rel="stylesheet" href="{{url_for('.static', filename='css/index.css')}}">
+    <link rel="icon" type="image/png" href="../static/img/logo.png">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"
+        integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA=="
+        crossorigin="anonymous"></script>
+        <script> $(function () {
+        $(document).ready(function () {
+            $('a[href*=#]').on('click', function (e) {
+                e.preventDefault();
+                $('html, body').animate({
+                    scrollTop: $($(this).attr('href')).offset().top
+                }, 500, 'linear');
+            });
+        });
+        // define all UI variable
+        const navToggler = document.querySelector('.nav-toggler');
+        const navMenu = document.querySelector('.site-navbar ul');
+        const navLinks = document.querySelectorAll('.site-navbar a');
+
+        // load all event listners
+        allEventListners();
+
+        // functions of all event listners
+        function allEventListners() {
+            // toggler icon click event
+            navToggler.addEventListener('click', togglerClick);
+            // nav links click event
+            navLinks.forEach(elem => elem.addEventListener('click', navLinkClick));
+        }
+
+        // togglerClick function
+        function togglerClick() {
+            navToggler.classList.toggle('toggler-open');
+            navMenu.classList.toggle('open');
+        }
+
+        // navLinkClick function
+        function navLinkClick() {
+            if (navMenu.classList.contains('open')) {
+                navToggler.click();
+            }
+        }
+
+    });
+    </script>
+</head>
+{% block info %}
+<main>
+    <header class="header-area">
+        <!-- site-navbar start -->
+        <div class="navbar-area">
+            <div class="container">
+                <nav class="site-navbar">
+                    <!-- site logo -->
+                    <a href="#home" class="site-logo"><img
+                            src="{{url_for('.static', filename='img/logo-white.png')}}"></a>
+
+                    <!-- site menu/nav -->
+                    <ul>
+                        <li><a href="{{url_for('log')}}">Logboek</a></li>
+                        <li><a href="{{url_for('logout')}}">Afmelden</a></li>
+                    </ul>
+
+                    <!-- nav-toggler for mobile version only -->
+                    <button class="nav-toggler">
+                        <span></span>
+                    </button>
+                </nav>
+            </div>
+        </div><!-- navbar-area end -->
+    </header>
+</main>
+<table border=1>
+   <thead>
+        <td>Time</td>
+        <td>First name</td>
+        <td>Last name</td>
+        <td>User_id</td>
+        <td>1a</td>
+        <td>1b</td>
+        <td>1c</td>
+        <td>2a</td>
+        <td>2b</td>
+        <td>2c</td>
+        <td>3a</td>
+        <td>3b</td>
+        <td>3c</td>
+        <td>4a</td>
+        <td>4b</td>
+        <td>4c</td>
+        <td>5a</td>
+        <td>5b</td>
+        <td>5c</td>
+   </thead>
+   <tbody>
+   {% for log in data %}
+   <tr>
+      <td>{{log[2]}}</td>
+      <td>{{log[0]}}</td>
+      <td>{{log[1]}}</td>
+      <td>{{log[18]}}</td>
+      <td>{{log[3]}}</td>
+      <td>{{log[4]}}</td>
+      <td> {{log[5]}}</td>
+      <td>{{log[6]}}</td>
+      <td>{{log[7]}}</td>
+      <td> {{log[8]}}</td>
+      <td>{{log[9]}}</td>
+      <td>{{log[10]}}</td>
+      <td> {{log[11]}}</td>
+      <td>{{log[12]}}</td>
+      <td>{{log[13]}}</td>
+      <td> {{log[14]}}</td>
+      <td>{{log[15]}}</td>
+      <td>{{log[16]}}</td>
+      <td> {{log[17]}}</td>
+   </tr>
+   {% endfor %}
+   </tbody>
+</table>
+{% endblock info %}

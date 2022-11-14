@@ -1,0 +1,230 @@
+<head>
+    <!-- Basic Page Needs-->
+    <meta charset="utf-8">
+    {% if title %}
+    <title>{{ title }}</title>
+    {% endif %}
+    <!-- Mobile Specific Metas-->
+    <meta name="viewport" content="width=device-width, initial-scale=1 shrink-to-fit=no">
+    <!-- FONT-->
+    <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="{{url_for('.static', filename='css/index.css')}}">
+    <link rel="stylesheet" href="{{url_for('.static', filename='css/main.css')}}">
+    <link rel="stylesheet" href="{{url_for('.static', filename='css/admin.css')}}">
+    <link rel="icon" type="image/png" href="../static/img/logo.png">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"
+    
+        integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA=="
+        crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function () {
+            var socket = io.connect('http://127.0.0.1:5000');
+            socket.on('connect', function () {
+                socket.send('User has connected!');
+                console.log('User has connected!');
+            });
+
+            socket.on('status', function (msg) {
+                console.log('recieved message');
+                var all_lamps = 0;
+                var all_val = msg['1a'];
+                $.each(msg, function (index, val) {
+                    if (all_val != val) {
+                        all_lamps = 1;
+                    }
+                    $("#SliderLight" + index + "Value").text(val);
+                    $("#SliderLight" + index).val(val);
+                });
+                if (all_lamps == 0) {
+                    $("#SliderLightAllValue").text(all_val);
+                    $("#SliderLightAll").val(all_val);
+                } else {
+                    $("#SliderLightAllValue").text("De lampen hebben een verschillende status");
+                    $("#SliderLightAll").val(0);
+                }
+            });
+
+            $(".slider").val(0);
+            $(".sliderValue").text("0");
+            $(document).on('input', '.slider', function () {
+                $("#" + this.id + "Value").text($("#" + this.id).val());
+            })
+
+            $(".slider").change(function () {
+                $.ajax({
+                    url: "set/" + this.id.substring(11, 13),
+                    type: "POST",
+                    data: {
+                        'dimming': $("#" + this.id).val()
+                    },
+                });
+                socket.send('change')
+            });
+
+            $(function () {
+                $('a[href*=#]').on('click', function (e) {
+                    e.preventDefault();
+                    $('html, body').animate({
+                        scrollTop: $($(this).attr('href')).offset().top
+                    }, 500, 'linear');
+                });
+            });
+            // define all UI variable
+            const navToggler = document.querySelector('.nav-toggler');
+            const navMenu = document.querySelector('.site-navbar ul');
+            const navLinks = document.querySelectorAll('.site-navbar a');
+
+            // load all event listners
+            allEventListners();
+
+            // functions of all event listners
+            function allEventListners() {
+                // toggler icon click event
+                navToggler.addEventListener('click', togglerClick);
+                // nav links click event
+                navLinks.forEach(elem => elem.addEventListener('click', navLinkClick));
+            }
+
+            // togglerClick function
+            function togglerClick() {
+                navToggler.classList.toggle('toggler-open');
+                navMenu.classList.toggle('open');
+            }
+
+            // navLinkClick function
+            function navLinkClick() {
+                if (navMenu.classList.contains('open')) {
+                    navToggler.click();
+                }
+            }
+
+        });
+    </script>
+</head>
+{% block info %}
+<main>
+    <header class="header-area">
+        <!-- site-navbar start -->
+        <div class="navbar-area">
+            <div class="container">
+                <nav class="site-navbar">
+                    <!-- site logo -->
+                    <a href="#home" class="site-logo"><img src="{{url_for('.static', filename='img/logo-white.png')}}"></a>
+
+                    <!-- site menu/nav -->
+                    <ul>
+                        <li><a href="{{url_for('log')}}">Logboek</a></li>
+                        <li><a href="{{url_for('logout')}}">Afmelden</a></li>
+                    </ul>
+
+                    <!-- nav-toggler for mobile version only -->
+                    <button class="nav-toggler">
+                        <span></span>
+                    </button>
+                </nav>
+            </div>
+        </div><!-- navbar-area end -->
+    </header>
+    <section id="section01" class="demo">
+        <div class="lights">
+            <p for="SliderLightAll" class="lamp_name">Alle lampen</p>
+            <input type="range" class="form-range slider" id="SliderLightAll" min="0" max="100">
+            <span class="sliderValue" id="SliderLightAllValue"></span>
+        </div>
+        <a href="#section02"><span></span>Alle lichten</a>
+    </section>
+
+    <section id="section02" class="demo">
+        <a href="#top"><span></span>Terug</a>
+        <div class="row">
+            <div class="light col">
+                <p for="SliderLight1a" class="lamp_name">Lamp 1a</p>
+                <input type="range" class="form-range slider" id="SliderLight1a" min="0" max="100">
+                <span class="sliderValue" id="SliderLight1aValue"></span>
+            </div>
+            <div class="light col">
+                <p for="SliderLight1b" class="lamp_name">Lamp 1b</p>
+                <input type="range" class="form-range slider" id="SliderLight1b" min="0" max="100">
+                <span class="sliderValue" id="SliderLight1bValue"></span>
+            </div>
+            <div class="light col">
+                <p for="SliderLight1c" class="lamp_name">Lamp 1c</p>
+                <input type="range" class="form-range slider" id="SliderLight1c" min="0" max="100">
+                <span class="sliderValue" id="SliderLight1cValue"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="light col">
+                <p for="SliderLight2a" class="lamp_name">Lamp 2a</p>
+                <input type="range" class="form-range slider" id="SliderLight2a" min="0" max="100">
+                <span class="sliderValue" id="SliderLight2aValue"></span>
+            </div>
+            <div class="light col">
+                <p for="SliderLight2b" class="lamp_name">Lamp 2b</p>
+                <input type="range" class="form-range slider" id="SliderLight2b" min="0" max="100">
+                <span class="sliderValue" id="SliderLight2bValue"></span>
+            </div>
+            <div class="light col">
+                <p for="SliderLight2c" class="lamp_name">Lamp 2c</p>
+                <input type="range" class="form-range slider" id="SliderLight2c" min="0" max="100">
+                <span class="sliderValue" id="SliderLight2cValue"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="light col">
+                <p for="SliderLight3a" class="lamp_name">Lamp 3a</p>
+                <input type="range" class="form-range slider" id="SliderLight3a" min="0" max="100">
+                <span class="sliderValue" id="SliderLight3aValue"></span>
+            </div>
+            <div class="light col">
+                <p for="SliderLight3b" class="lamp_name">Lamp 3b</p>
+                <input type="range" class="form-range slider" id="SliderLight3b" min="0" max="100">
+                <span class="sliderValue" id="SliderLight3bValue"></span>
+            </div>
+            <div class="light col">
+                <p for="SliderLight3c" class="lamp_name">Lamp 3c</p>
+                <input type="range" class="form-range slider" id="SliderLight3c" min="0" max="100">
+                <span class="sliderValue" id="SliderLight3cValue"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="light col">
+                <p for="SliderLight4a" class="lamp_name">Lamp 4a</p>
+                <input type="range" class="form-range slider" id="SliderLight4a" min="0" max="100">
+                <span class="sliderValue" id="SliderLight4aValue"></span>
+            </div>
+            <div class="light col">
+                <p for="SliderLight4b" class="lamp_name">Lamp 4b</p>
+                <input type="range" class="form-range slider" id="SliderLight4b" min="0" max="100">
+                <span class="sliderValue" id="SliderLight4bValue"></span>
+            </div>
+            <div class="light col">
+                <p for="SliderLight4c" class="lamp_name">Lamp 4c</p>
+                <input type="range" class="form-range slider" id="SliderLight4c" min="0" max="100">
+                <span class="sliderValue" id="SliderLight4cValue"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="light col">
+                <p for="SliderLight5a" class="lamp_name">Lamp 5a</p>
+                <input type="range" class="form-range slider" id="SliderLight5a" min="0" max="100">
+                <span class="sliderValue" id="SliderLight5aValue"></span>
+            </div>
+            <div class="light col">
+                <p for="SliderLight5b" class="lamp_name">Lamp 5b</p>
+                <input type="range" class="form-range slider" id="SliderLight5b" min="0" max="100">
+                <span class="sliderValue" id="SliderLight5bValue"></span>
+            </div>
+            <div class="light col">
+                <p for="SliderLight5c" class="lamp_name">Lamp 5c</p>
+                <input type="range" class="form-range slider" id="SliderLight5c" min="0" max="100">
+                <span class="sliderValue" id="SliderLight5cValue"></span>
+            </div>
+        </div>
+    </section>
+    </section>
+
+</main>
+{% endblock info %}

@@ -1,0 +1,334 @@
+.row {
+    width: 100%;
+    display: inline;
+}
+.lamp_name{
+    align-self: center;
+}
+
+.lights{
+    width: 80vw;
+    margin-top: 10vh;
+    margin-left: 10vw;
+    margin-right: 5%;
+    float: left;
+    text-align: center;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.6);
+    border-color: black;
+    border-style: solid;
+    border-width: 0.5vw;
+    border-radius: 25px;
+}
+.light {
+    width: 22.33vw;
+    height: 18 vh;
+    margin-top: 2vh;
+    margin-left: 5%;
+    margin-right: 5%;
+    float: left;
+    text-align: center;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.6);
+    border-color: black;
+    border-style: solid;
+    border-width: 0.5vw;
+    border-radius: 25px;
+}
+
+.slider{
+    width: 80%;
+    margin-left:10%;
+    margin-right:10%;
+    border-radius:0%;
+}
+
+section {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+  }
+  section::after {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    content: '';
+    width: 100%;
+    height: 20%;
+    background: -webkit-linear-gradient(top,rgba(0,0,0,0) 0,rgba(0,0,0,.8) 80%,rgba(0,0,0,.8) 100%);
+    background: linear-gradient(to bottom,rgba(0,0,0,0) 0,rgba(0,0,0,.8) 80%,rgba(0,0,0,.8) 100%);
+  }
+  .demo a {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    z-index: 2;
+    display: inline-block;
+    -webkit-transform: translate(0, -50%);
+    transform: translate(0, -50%);
+    color: #fff;
+    font : normal 400 20px/1 'Josefin Sans', sans-serif;
+    letter-spacing: .1em;
+    text-decoration: none;
+    transition: opacity .3s;
+  }
+  .demo a:hover {
+    opacity: .5;
+  }
+  
+  
+  
+  #section01 a {
+    padding-top: 60px;
+  }
+  #section01 a span {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 24px;
+    height: 24px;
+    margin-left: -12px;
+    border-left: 1px solid #fff;
+    border-bottom: 1px solid #fff;
+    -webkit-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    box-sizing: border-box;
+  }
+  
+  
+  
+  #section02 a {
+    padding-top: 60px;
+  }
+  #section02 a span {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 24px;
+    height: 24px;
+    margin-left: -12px;
+    border-left: 1px solid #fff;
+    border-bottom: 1px solid #fff;
+    -webkit-transform: rotate(+135deg);
+    transform: rotate(+135deg);
+    box-sizing: border-box;
+  }
+  
+  #logout{
+
+    top: 25px;
+    right: 25px;
+    bottom: auto;
+    left:auto;
+  }
+  img{
+    height: 100%;
+  }
+
+  html{
+    overflow: hidden;
+  }/* default css start */
+  *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  body{
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+  }
+  .container {
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 15px;
+  }
+  .header-area {
+    background: linear-gradient(rgba(0,0,0,.3), rgba(0,0,0,.5)),
+    url(https://images.unsplash.com/photo-1528353518104-dbd48bee7bc4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2089&q=80);
+    background-position: center center;
+    background-size: cover;
+  }
+  /* default css end */
+  
+  
+  /* navbar regular css start */
+  .navbar-area {
+    background: rgba(0,0,0,.6);
+    border-bottom: 1px solid #000;
+  }
+  .site-navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  a.site-logo {
+    font-size: 26px;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: #fff;
+    text-decoration: none;
+  }
+  .site-navbar ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+  }
+  .site-navbar ul li a {
+    color: #fff;
+    padding: 20px;
+    display: block;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+  .site-navbar ul li a:hover {
+    background: rgba(255,255,255,.1);
+  }
+  /* navbar regular css end */
+  
+  
+  /* nav-toggler css start */
+  .nav-toggler {
+    border: 3px solid #fff;
+    padding: 5px;
+    background-color: transparent;
+    cursor: pointer;
+    height: 39px;
+    display: none;
+  }
+  .nav-toggler span, 
+  .nav-toggler span:before, 
+  .nav-toggler span:after {
+    width: 28px;
+    height: 3px;
+    background-color: #fff;
+    display: block;
+    transition: .3s;
+  }
+  .nav-toggler span:before {
+    content: '';
+    transform: translateY(-9px);
+  }
+  .nav-toggler span:after {
+    content: '';
+    transform: translateY(6px);
+  }
+  .nav-toggler.toggler-open span {
+    background-color: transparent;
+  }
+  .nav-toggler.toggler-open span:before {
+    transform: translateY(0px) rotate(45deg);
+  }
+  .nav-toggler.toggler-open span:after {
+    transform: translateY(-3px) rotate(-45deg);
+  }
+  img{
+    height: 10vh;
+  }
+  /* intro-area css end */
+  #section01{
+    height: 90vh;
+  }
+  
+  
+
+  @media only screen and (max-width: 780px) {
+    html{
+      overflow: scroll;
+    }
+    .lights{
+      margin-top: 5%;
+      width: 90vw;
+      margin-left: 5%;
+      margin-bottom: 5%;
+    }
+    .light {
+      width: 90vw;
+      margin-top: 2vh;
+      margin-left: 5%;
+      margin-right: 5%;
+      float: left;
+      text-align: center;
+      color: white;
+      background-color: rgba(0, 0, 0, 0.6);
+      border-color: black;
+      border-style: solid;
+      border-width: 0.5vw;
+      border-radius: 25px;
+  }
+  .col:last-of-type{
+    margin-bottom: 5%;
+  }
+  section{
+    height: 0vh;
+  }
+  #section01{
+    height: 0;
+  }
+  section a{
+    padding-top: 60px;
+    display: hidden;
+    text-indent: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    font-size: 0;
+  }
+  @media screen and (max-width: 780px) {
+    .lights{
+      margin-top: 5%;
+      width: 90vw;
+      margin-left: 5vw;
+    }
+    img{
+      height: 60px;
+    }
+    .container {
+      max-width: 720px;
+      z-index: 5;
+    }
+    /* navbar css for mobile start */
+    .nav-toggler{
+      display: block;
+    }
+    .site-navbar {
+      min-height: 60px;
+    }
+    .site-navbar ul {
+      position: absolute;
+      width: 100%;
+      height: calc(100vh - 60px);
+      left: 0;
+      top: 60px;
+      flex-direction: column;
+      align-items: center;
+      border-top: 1px solid #444;
+      background-color: rgba(0,0,0,1);
+      max-height: 0;
+      overflow: hidden;
+      transition: .3s;
+      z-index: 5;
+    }
+    .site-navbar ul li {
+      width: 100%;
+      text-align: center;
+    }
+    .site-navbar ul li a {
+      padding: 25px;
+    }
+    .site-navbar ul li a:hover {
+      background-color: rgba(255,255,255,1);
+    }
+    .site-navbar ul.open {
+      max-height: 100vh;
+      overflow: visible;
+    }
+    .intro-area h2 {
+      font-size: 36px;
+      margin-bottom: 15px;
+    }  
+    /* navbar css for mobile end */
+  }
+}

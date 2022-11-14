@@ -1,0 +1,10 @@
+pysqlite3
+flask
+flask_login
+aiocoap
+flask_bcrypt
+flask_socketio
+requests
+datetime
+asyncio
+flask_wtf

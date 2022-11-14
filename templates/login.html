@@ -1,0 +1,65 @@
+<head>
+    <!-- Basic Page Needs-->
+    <meta charset="utf-8">
+    {% if title %}
+    <title>{{ title }}</title>
+    {% endif %}
+    <!-- Mobile Specific Metas-->
+    <meta name="viewport" content="width=device-width, initial-scale=1 shrink-to-fit=no">
+    <!-- FONT-->
+    <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="{{url_for('.static', filename='css/login.css')}}">
+    <link rel="icon" type="image/png" href="../static/img/logo.png">
+</head>
+{% block info %}
+<form method='POST' action="">
+    {{ form.hidden_tag() }}
+    <fieldset>
+        <h1>Log In</h1>
+        {% with messages = get_flashed_messages(with_categories=True)%}
+        {% if messages %}
+        {% for category, message in messages %}
+        <div class="alert alert-{{ category }}">
+            <h5>{{ message }}<h5>
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+        <div class="form-group">
+            {{ form.email.label(class="form-control-label")}}
+            {% if form.email.errors %}
+            {{ form.email(class="form-control form-control-lg is-invalid") }}
+            <div class="invalid-feedback">
+                {% for error in form.email.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+            </div>
+            {% else %}
+            {{ form.email(class="form-control form-control-lg")}}
+            {% endif %}
+        </div>
+        <div class="form-group">
+            {{ form.password.label(class="form-control-label")}}
+            {% if form.password.errors %}
+            {{ form.password(class="form-control form-control-lg is-invalid") }}
+            <div class="invalid-feedback">
+                {% for error in form.password.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+            </div>
+            {% else %}
+            {{ form.password(class="form-control form-control-lg")}}
+            {% endif %}
+        </div>
+        <div class="form-group switch">
+            {{ form.remember(class="form-check-input") }}
+            {{ form.remember.label(class="form-check-label") }}
+            <span class="slider round"></span>
+        </div>
+    </fieldset>
+    <div class="form-group">
+        {{ form.submit(class="btn btn-outline-info")}}
+    </div>
+    <span>Create an Account <a href="/register">Sign Up Now</a></span>
+</form>
+{% endblock info %}

@@ -1,0 +1,30 @@
+body{
+    text-align: center;
+}
+table {
+    border: black;
+    border-width: medium;
+    border-style: solid;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.6);
+    font-size: x-large;
+    width: 80vw;
+    margin-top: 5%;
+    margin-left: 10%;
+}
+
+tbody {
+    overflow-y: auto;
+    width: 100%;
+    overflow-x: auto;
+}
+
+thead td {
+    background-color: blue;
+    border: blue;
+    color: white;
+}
+
+td {
+    color: white;
+}

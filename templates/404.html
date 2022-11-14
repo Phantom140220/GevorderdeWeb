@@ -1,0 +1,40 @@
+<head>
+    <!-- Basic Page Needs-->
+    <meta charset="utf-8">
+    {% if title %}
+    <title>{{ title }}</title>
+    {% endif %}
+    <!-- Mobile Specific Metas-->
+    <meta name="viewport" content="width=device-width, initial-scale=1 shrink-to-fit=no">
+    <!-- FONT-->
+    <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="{{url_for('.static', filename='css/404.css')}}">
+    <link rel="icon" type="image/png" href="../static/img/logo.png">
+</head>
+<body>
+    <section class="page_404">
+        <div class="container">
+            <div class="row">	
+            <div class="col-sm-12 ">
+            <div class="col-sm-10 col-sm-offset-1  text-center">
+            <div class="four_zero_four_bg">
+                <h1 class="text-center ">404</h1>
+            
+            
+            </div>
+            
+            <div class="contant_box_404">
+            <h3 class="h2">
+            Jij lijkt een beetje verdwaald
+            </h3>
+            
+            <p>Deze pagina is niet beschikbaar!</p>
+            
+            <a href="{{url_for('home')}}" class="link_404">Misschien helpt deze knop</a>
+        </div>
+            </div>
+            </div>
+            </div>
+        </div>
+    </section>
+    </body>
